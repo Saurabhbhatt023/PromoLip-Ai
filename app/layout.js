@@ -1,13 +1,9 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
-<<<<<<< HEAD
 import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "./provider";
 
 
-=======
-import { ClerkProvider } from '@clerk/nextjs';
->>>>>>> aff22e53b1b7780143a0bf4f2843dd3b58907cc4
 
 export const metadata = {
   title: "Create Next App",
@@ -21,14 +17,10 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={outfit.className}>
-<<<<<<< HEAD
           
           <Provider> 
             {children}
             </Provider>
-=======
-          {children}
->>>>>>> aff22e53b1b7780143a0bf4f2843dd3b58907cc4
         </body>
       </html>
     </ClerkProvider>

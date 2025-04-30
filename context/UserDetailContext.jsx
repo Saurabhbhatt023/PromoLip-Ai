@@ -1,3 +1,6 @@
-const { createContext } = require("react");
+import { createContext } from "react";
 
-export UserDetailContext = createContext(null)
+
+
+export const UserDetailContext = createContext(null);
+
