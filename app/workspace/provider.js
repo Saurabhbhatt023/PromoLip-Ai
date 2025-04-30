@@ -28,6 +28,7 @@ const WorkspaceProvider = ({ children }) => {
   useEffect(() => {
     if (isLoaded && user) {
       CreateNewUser();
+      create2()
     }
   }, [isLoaded, user]);
 
