@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 import { api } from '@/convex/_generated/api';
 import { useUser } from '@clerk/nextjs';
@@ -36,3 +37,17 @@ const WorkspaceProvider = ({ children }) => {
 };
 
 export default WorkspaceProvider;
+=======
+"use client"
+import React from 'react'
+
+const WorkspaceProvider = ({children}) => {
+  return (
+    <div>
+      {children}
+    </div>
+  )
+}
+
+export default WorkspaceProvider
+>>>>>>> aff22e53b1b7780143a0bf4f2843dd3b58907cc4

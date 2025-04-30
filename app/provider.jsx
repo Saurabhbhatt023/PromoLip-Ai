@@ -9,7 +9,11 @@ const Provider = ({children}) => {
   return (
 
 <ConvexProvider client={convex}>
+<<<<<<< HEAD
     <div>
+=======
+<div>
+>>>>>>> aff22e53b1b7780143a0bf4f2843dd3b58907cc4
     {children}      
     </div>
     </ConvexProvider>
