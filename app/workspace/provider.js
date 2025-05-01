@@ -43,7 +43,7 @@ const WorkspaceProvider = ({ children }) => {
   
       <SidebarProvider> 
         <AppSidebar/>
-      <div>
+      <div className='w-full p-10'>
       <SidebarTrigger/>
         {children}</div>
       </SidebarProvider>

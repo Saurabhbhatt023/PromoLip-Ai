@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import {
   Sidebar,
@@ -14,6 +15,7 @@ import {
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { LayoutDashboard, Settings2Icon, Video, Videotape, WalletCards } from 'lucide-react'
+import { useParams, usePathname } from 'next/navigation'
 
 const MenuOptions = [
   {
@@ -44,6 +46,8 @@ const MenuOptions = [
 ]
 
 const AppSidebar = () => {
+  const path = usePathname()
+  console.log(path)
   return (
     <div>
       <Sidebar>
@@ -62,11 +66,10 @@ const AppSidebar = () => {
             <SidebarMenu>
               {MenuOptions.map((menu, index) => (
                 <SidebarMenuItem key={index}>
-                  <SidebarMenuButton asChild className={'p-5'} >
-                    <a href={menu.path} 
-                    className='text-[17px]'>
-
-                      <menu.icon/>
+                  <SidebarMenuButton asChild className={'p-5'}>
+                    <a href={menu.path}
+                      className={`text-[17px] ${path === menu.path && 'text-primary bg-sky-50'}`}>
+                      <menu.icon className='h-10 w-10'/>
                       <span>{menu.title}</span>
                     </a>
                   </SidebarMenuButton>
