@@ -5,10 +5,15 @@ import axios from 'axios'
 import { LoaderCircle, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { useMutation } from 'convex/react'
+import { api } from '@/convex/_generated/api'
 
 const CreateAd = () => {
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [scripts, setScripts] = useState([]);
+  const [selectedScriptIndex, setSelectedScriptIndex] = useState(null);
+  const createVideo = useMutation(api.video.createVideoData);
 
   const GenerateAIVideoScript = async () => {
     if (!userInput) {
@@ -22,11 +27,34 @@ const CreateAd = () => {
         topic: userInput
       });
 
-      console.log("Response:", response);
+      console.log("Response:", response.data);
+      
+      if (response.data.scripts && Array.isArray(response.data.scripts)) {
+        setScripts(response.data.scripts);
+      } else {
+        console.log("Invalid scripts format");
+        setScripts([]);
+      }
+      
     } catch (err) {
       console.error("Error generating script:", err);
     } finally {
       setLoading(false);
+    }
+  }
+
+  const handleSelectScript = async (index) => {
+    setSelectedScriptIndex(index);
+    
+    try {
+      const videoId = await createVideo({
+        topic: userInput,
+        script: scripts[index]
+      });
+      
+      console.log("Video created with ID:", videoId);
+    } catch (err) {
+      console.error("Error saving script:", err);
     }
   }
 
@@ -53,6 +81,23 @@ const CreateAd = () => {
         {loading ? <LoaderCircle className='animate-spin mr-2' /> : <Sparkles className='mr-2' />}
         Generate
       </Button>
+      
+      {scripts.length > 0 && (
+        <div className='mt-8 w-full max-w-2xl'>
+          <h3 className='font-bold text-xl mb-4'>Choose a Script</h3>
+          
+          {scripts.map((script, index) => (
+            <div 
+              key={index}
+              className={`p-4 mb-4 border rounded-lg cursor-pointer ${selectedScriptIndex === index ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:bg-gray-50'}`}
+              onClick={() => handleSelectScript(index)}
+            >
+              <h4 className='font-medium mb-2'>Script Option {index + 1}</h4>
+              <p className='text-gray-700 whitespace-pre-wrap'>{script.content}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
